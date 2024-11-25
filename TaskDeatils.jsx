@@ -1,10 +1,10 @@
 import { Icon } from "@iconify/react";
-import { useLocation } from "react-router-dom"; 
+// import { useLocation } from "react-router-dom"; 
 
-const TaskDetails = () => {
-  const location = useLocation(); // To get state passed via navigate
-  const { taskId } = useParams(); // If task ID is part of the URL
-  const task = location.state?.task; // Extract the task passed via state
+const TaskDetails = ({task, onClose}) => {
+  // const location = useLocation(); // To get state passed via navigate
+  // const { taskId } = useParams(); // If task ID is part of the URL
+  // const task = location.state?.task; // Extract the task passed via state
 
   
 
