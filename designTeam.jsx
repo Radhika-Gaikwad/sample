@@ -94,11 +94,18 @@ const Board = () => {
   };
 
 
-  const handleTaskClick = (task) => {
-    navigate(`/task/${task.id}`, { state: { task } }); 
+  // const handleTaskClick = (task) => {
+  //   navigate(`/task/${task.id}`, { state: { task } }); 
+  // };
+
+  // const handleTaskClick = (task) => {
+  //   setSelectedTask(task);
+  // };
+
+  const handleTaskClick = (task, columnTitle) => {
+    setSelectedTask({ task, columnTitle });
   };
-
-
+  
 
   return (
     <div className="p-2 bg-gray-100 min-h-screen">
@@ -130,8 +137,8 @@ const Board = () => {
       {/* Board Columns */}
       <div className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-4">
       {filteredColumns.map((column, colIndex) => (
-  <div key={colIndex} className="flex-2">
-    <Link to={column.path} className="w-full">
+   <div key={colIndex} className="flex-2">
+    {/* <Link to={column.path} className="w-full"> */}
       <div className="flex items-center justify-between lg:justify-between cursor-pointer border-b-2 pb-2"
         style={{
           borderColor: column.color === "green" ? "green" :
@@ -139,6 +146,7 @@ const Board = () => {
               column.color === "red" ? "red" :
                 column.color === "teal" ? "teal" : "gray"
         }}
+        onClick={() => toggleColumn(colIndex)}
       >
                 <h2 className={`font-semibold p-2 ${column.color === "green" ? "text-gray-600" :
                   column.color === "yellow" ? "text-gray-600" :
@@ -159,7 +167,7 @@ const Board = () => {
                   onClick={(e) => { e.preventDefault(); toggleColumn(colIndex); }} // Only toggle visibility on click for mobile
                 />
               </div>
-            </Link>
+            {/* </Link> */}
 
            {/* Mobile Dropdown */}
 {showFilterDropdown && (
@@ -229,7 +237,10 @@ const Board = () => {
           </div>
         ))}
       </div>
-      {selectedTask && <TaskDetails task={selectedTask} onClose={() => setSelectedTask(null)} />}
+{/* Task Details Modal */}
+{selectedTask && (
+  <TaskDetails task={selectedTask.task} onClose={() => setSelectedTask(null)} />
+)}
     </div>
   );
 };
